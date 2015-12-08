@@ -1,0 +1,42 @@
+body {
+  font-family: "Source Sans Pro";
+  color: #111;
+  padding: 10vh 0;
+}
+
+h1 {
+  font-size: 36px;
+  text-align: center;
+  margin: 48px
+}
+
+p {
+  font-size: 20px;
+  margin-bottom: 48px;
+}
+
+.axis path,
+.axis line {
+  fill: none;
+  stroke: #CCC;
+  shape-rendering: crispEdges;
+}
+
+.x path,
+.x line {
+  stroke: none;
+}
+
+.circle {
+  fill: #333;
+}
+
+.line {
+  stroke: #DDD;
+  stroke-width: 1px;
+}
+
+svg {
+  height: 400px;
+  font: 10px sans-serif;
+}

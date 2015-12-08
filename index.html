@@ -1,0 +1,48 @@
+<html>
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta charset="utf-8">
+    <title>Long Live 8th Grade</title>
+
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:300' rel='stylesheet' type='text/css'>
+    <link href='css/main.css' rel='stylesheet' type='text/css'>
+
+    <script src="js/d3.min.js" charset="utf-8"></script>
+    <script src="js/babel.min.js" charset="utf-8"></script>
+    <script src="js/_.min.js" charset="utf-8"></script>
+  </head>
+  <body>
+
+    <!-- Vizualization 1: Population, Education vs Avg Age of Death -->
+    <div id="viz1group" style="width: 100%;">
+      <div class="container">
+        <!-- Header -->
+        <div class="row">
+          <h1>Why do 8th Grade Graduates Live Longer?</h1>
+          <div class="col-md-10 col-md-offset-1">
+            <p>
+              Each year, the CDC publishes a dataset of deaths from that year.
+              Approximately 2.5 million people die in the US each year and each one
+              gets a row in the dataset with a slew of demographic data. Below , I
+              have grouped all deaths from 2003, 2008, and 2013 by their highest
+              educational attainment. The vertical axis represents the average
+              age of death for each group. From this data, a question arises:
+              Why do 8th grade graduates live longer than their more educated
+              fellows? Note: Those who died with no formal education are
+              excluded because they have a drastically lower average life expectancy
+              due to those who die from infant-specific diseases.
+            </p>
+          </div>
+        </div>
+
+        <!-- Viz -->
+        <div class="row">
+          <svg id="viz1" class="col-md-12"></svg>
+        </div>
+      </div>
+    </div>
+  </body>
+
+  <script src="js/linechart.js" type="text/babel" charset="utf-8"></script>
+</html>
