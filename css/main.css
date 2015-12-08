@@ -7,12 +7,11 @@ body {
 h1 {
   font-size: 36px;
   text-align: center;
-  margin: 48px
 }
 
 p {
   font-size: 20px;
-  margin-bottom: 48px;
+  margin: 48px 0;
 }
 
 .axis path,
@@ -37,6 +36,6 @@ p {
 }
 
 svg {
-  height: 400px;
-  font: 10px sans-serif;
+  height: 600px;
+  font: 13px 'Source Sans Pro';
 }

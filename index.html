@@ -11,6 +11,10 @@
     <script src="js/d3.min.js" charset="utf-8"></script>
     <script src="js/babel.min.js" charset="utf-8"></script>
     <script src="js/_.min.js" charset="utf-8"></script>
+    <script
+            type="text/javascript"
+            src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js">
+    </script>
   </head>
   <body>
 
@@ -36,13 +40,73 @@
           </div>
         </div>
 
-        <!-- Viz -->
+        <!-- Population Line Chart (viz1) -->
         <div class="row">
           <svg id="viz1" class="col-md-12"></svg>
+        </div>
+
+        <div class="row">
+          <div class="col-md-10 col-md-offset-1">
+            <p>
+              Why do those who only reach an elementary level of education live longer than their more educated peers?
+              Are they dying of something different? To answer that question, the below visualization shows the cause of
+              death by educational attainment. If those whose highest educational attainment was elementary school died
+              of something different, the circles, representing the percentage of an educational group that died of a
+              particular cause, should change in size from row to row. Mouse over the circles for exact percentages, and
+              use the controls if you want to drill down further into the data.
+            </p>
+            <p>
+              <!-- Year Selection -->
+              <label style="margin-right: 10px;">Year: </label>
+              <label class="radio-inline">
+                <input type="radio" value="2003" name="yearselect">2003</label>
+              <label class="radio-inline">
+                <input type="radio" value="2008" name="yearselect">2008</label>
+              <label class="radio-inline">
+                <input type="radio" value="2013" name="yearselect">2013</label>
+              <label class="radio-inline">
+                <input type="radio" value="all" name="yearselect" checked>All Years</label>
+              <br/>
+
+              <!-- Education Drilldown -->
+              <label style="margin-right: 10px;">Education Drilldown: </label>
+              <label class="checkbox-inline">
+                <input type="checkbox" value="Elementary" name="educationselect">
+                Elementary (1-8)
+              </label>
+              <label class="checkbox-inline">
+                <input type="checkbox" value="High School" name="educationselect">
+                High School (9-12)
+              </label>
+              <label class="checkbox-inline">
+                <input type="checkbox" value="College" name="educationselect">
+                College
+              </label>
+              <br/>
+
+              <!-- Cause Drilldown -->
+              <label style="margin-right: 10px;">Cause Drilldown: </label>
+              <label class="checkbox-inline">
+                <input type="checkbox" value="Cancer" name="causeselect">
+                Cancer
+              </label>
+              <label class="checkbox-inline">
+                <input type="checkbox" value="Cardiovascular" name="causeselect">
+                Cardiovascular Issues
+              </label>
+              <br/>
+            </p>
+          </div>
+
+          <!-- Cause of Death Bubble Chart (viz2) -->
+          <div class="row">
+            <svg id="viz2" class="col-md-12"></svg>
+          </div>
         </div>
       </div>
     </div>
   </body>
 
   <script src="js/linechart.js" type="text/babel" charset="utf-8"></script>
+  <script src="js/bubblechart.js" type="text/babel" charset="utf-8"></script>
 </html>

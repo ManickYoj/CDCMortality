@@ -8,4 +8,8 @@
 makedb.py
 warehouse.py
 warehouseAndTest.py
+dbToJSON.py
+tables.py
+
+warehouse.db
 mortality.db
