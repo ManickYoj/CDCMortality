@@ -55,50 +55,56 @@
               particular cause, should change in size from row to row. Mouse over the circles for exact percentages, and
               use the controls if you want to drill down further into the data.
             </p>
-            <p>
-              <!-- Year Selection -->
-              <label style="margin-right: 10px;">Year: </label>
-              <label class="radio-inline">
-                <input type="radio" value="2003" name="yearselect">2003</label>
-              <label class="radio-inline">
-                <input type="radio" value="2008" name="yearselect">2008</label>
-              <label class="radio-inline">
-                <input type="radio" value="2013" name="yearselect">2013</label>
-              <label class="radio-inline">
-                <input type="radio" value="all" name="yearselect" checked>All Years</label>
-              <br/>
-
-              <!-- Education Drilldown -->
-              <label style="margin-right: 10px;">Education Drilldown: </label>
-              <label class="checkbox-inline">
-                <input type="checkbox" value="Elementary" name="educationselect">
-                Elementary (1-8)
-              </label>
-              <label class="checkbox-inline">
-                <input type="checkbox" value="High School" name="educationselect">
-                High School (9-12)
-              </label>
-              <label class="checkbox-inline">
-                <input type="checkbox" value="College" name="educationselect">
-                College
-              </label>
-              <br/>
-
-              <!-- Cause Drilldown -->
-              <label style="margin-right: 10px;">Cause Drilldown: </label>
-              <label class="checkbox-inline">
-                <input type="checkbox" value="Cancer" name="causeselect">
-                Cancer
-              </label>
-              <label class="checkbox-inline">
-                <input type="checkbox" value="Cardiovascular" name="causeselect">
-                Cardiovascular Issues
-              </label>
-              <br/>
-            </p>
           </div>
 
           <!-- Cause of Death Bubble Chart (viz2) -->
+          <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+              <h3><small>Vizualization Controls</small></h3>
+              <p class="controls">
+                <!-- Year Selection -->
+                <label style="margin-right: 10px;"><strong>Year: </strong></label>
+                <label class="radio-inline">
+                  <input type="radio" value="2003" name="yearselect">2003</label>
+                <label class="radio-inline">
+                  <input type="radio" value="2008" name="yearselect">2008</label>
+                <label class="radio-inline">
+                  <input type="radio" value="2013" name="yearselect">2013</label>
+                <label class="radio-inline">
+                  <input type="radio" value="all" name="yearselect" checked>All Years</label>
+                <br/>
+
+                <!-- Education Drilldown -->
+                <label style="margin-right: 10px;"><strong>Education Drilldown: </strong></label>
+                <label class="checkbox-inline">
+                  <input type="checkbox" value="Elementary" name="educationselect">
+                  Elementary (1-8)
+                </label>
+                <label class="checkbox-inline">
+                  <input type="checkbox" value="High School" name="educationselect">
+                  High School (9-12)
+                </label>
+                <label class="checkbox-inline">
+                  <input type="checkbox" value="College" name="educationselect">
+                  College
+                </label>
+                <br/>
+
+                <!-- Cause Drilldown -->
+                <label style="margin-right: 10px;"><strong>Cause Drilldown: </strong></label>
+                <label class="checkbox-inline">
+                  <input type="checkbox" value="Cancer" name="causeselect">
+                  Cancer
+                </label>
+                <label class="checkbox-inline">
+                  <input type="checkbox" value="Cardiovascular" name="causeselect">
+                  Cardiovascular Issues
+                </label>
+                <br/>
+              </p>
+            </div>
+          </div>
+
           <div class="row">
             <svg id="viz2" class="col-md-12"></svg>
           </div>

@@ -12,6 +12,16 @@ function run () {
       return _.reject(rawData, datum => _.contains(datum, "Not Specified"));
     });
 
+    // Filter out all No Formal Education values (for any key)
+    eduCauseData.addPipe((rawData) => {
+      return _.reject(rawData, datum => _.contains(datum, "No Formal Education"));
+    });
+
+    // Filter out all Not Started values (for any key)
+    eduCauseData.addPipe((rawData) => {
+      return _.reject(rawData, datum => _.contains(datum, "Not Started"));
+    });
+
     // Group specific cause of death into categories
     // EG. All malignant neoplasm deaths -> Cancer
     eduCauseData.addNamedPipe("Cancer", (rawData) => {
@@ -33,7 +43,7 @@ function run () {
     });
 
     eduCauseData.addNamedPipe("College", (rawData) => {
-      return relabelData(rawData, "Education", GROUPINGS["College Education"]);
+      return relabelData(rawData, "Education", GROUPINGS["Education - College"]);
     });
 
     // Construct a matrix from the data
@@ -492,6 +502,7 @@ const GROUPINGS = {
       "2 Years of College",
       "3 Years of College",
       "4 Years of College",
+      "5+ Years of College"
     ],
   },
 

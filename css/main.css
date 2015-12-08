@@ -39,3 +39,11 @@ svg {
   height: 600px;
   font: 13px 'Source Sans Pro';
 }
+
+label {
+  font: 14px 'Source Sans Pro';
+}
+
+.controls {
+  margin-top: 24px
+}
