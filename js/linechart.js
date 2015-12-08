@@ -1,4 +1,4 @@
-function lineChart(target, path) {
+function lineChart(target, path, grouping=null) {
   // Store svg attributes for easy use
   const margin = {top: 20, right: 50, bottom: 100, left: 50};
   const width = d3.select(target).style("width").replace("px", "") - margin.left - margin.right,
@@ -10,6 +10,8 @@ function lineChart(target, path) {
     height: height + margin.top + margin.bottom,
   }).append("g")
     .attr("transform", `translate(${margin.left}, ${margin.top})`)
+
+  const colors = d3.scale.category10();
 
   // Set up axes
   const x = d3.scale.ordinal()
@@ -29,6 +31,21 @@ function lineChart(target, path) {
   // Load data and render chart
   d3.json("/data/" + path, (err, data) => {
     if (err) throw err;
+
+    // Split data into groups if a grouping key is specified
+    let groups, group;
+    if (grouping === null) {
+      groups = {
+        population: data
+      };
+    } else {
+      groups = {}
+      data.forEach((datum) => {
+        group = datum[grouping];
+        if (group in groups) groups[group].push(datum);
+        else groups[group] = [datum]
+      });
+    }
 
     // Establish Axes Domains
     x.domain(_.pluck(data, "Education"));
@@ -57,21 +74,26 @@ function lineChart(target, path) {
       .attr({
         class: "line",
         x1: d => x(d["Education"]),
-        y1: d => y(d["Age (Years)"]),
+        y1: 0,
         x2: d => x(d["Education"]),
         y2: height,
       });
 
-    // Draw Circles
-    svg.selectAll("path")
-      .data(data, d => `circle: ${d["Education"]}, ${d["Age (Years)"]}`)
-      .enter()
-      .append("path")
-      .attr("class", "circle")
-      .attr("transform", d => `translate(${x(d["Education"])}, ${y(d["Age (Years)"])})`)
-      .attr("d", d3.svg.symbol());
+    _.forEach(groups, (groupData, groupName, index) => {
+      // Draw Circles
+      svg.selectAll("." + groupName)
+        .data(groupData, d => `circle: ${d["Education"]}, ${d["Age (Years)"]}`)
+        .enter()
+        .append("path")
+        .attr("class", "." + groupName)
+        .attr("class", "circle")
+        .attr("transform", d => `translate(${x(d["Education"])}, ${y(d["Age (Years)"])})`)
+        .attr("d", d3.svg.symbol())
+        .style("fill", colors(groupName));
+    });
   });
 }
 
 // -- Running Script -- //
 lineChart("#viz1", "population.json")
+lineChart("#viz3", "sex.json", "Sex")
