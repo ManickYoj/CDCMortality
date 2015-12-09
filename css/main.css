@@ -38,6 +38,7 @@ p {
 svg {
   height: 600px;
   font: 13px 'Source Sans Pro';
+  margin-top: 10px;
 }
 
 label {

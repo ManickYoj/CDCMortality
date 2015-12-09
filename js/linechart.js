@@ -1,6 +1,6 @@
-function lineChart(target, path, grouping=null) {
+function lineChart(target, path, grouping=null, filterGroups=[], showLegend=true) {
   // Store svg attributes for easy use
-  const margin = {top: 20, right: 50, bottom: 100, left: 50};
+  const margin = {top: 50, right: 50, bottom: 100, left: 50};
   const width = d3.select(target).style("width").replace("px", "") - margin.left - margin.right,
         height = d3.select(target).style("height").replace("px", "") - margin.top - margin.bottom;
 
@@ -28,6 +28,9 @@ function lineChart(target, path, grouping=null) {
     .scale(y)
     .orient("left");
 
+  const symbol = d3.svg.symbol()
+    .size(d => Math.log(d["Number in Group"])*7);
+
   // Load data and render chart
   d3.json("/data/" + path, (err, data) => {
     if (err) throw err;
@@ -36,20 +39,22 @@ function lineChart(target, path, grouping=null) {
     let groups, group;
     if (grouping === null) {
       groups = {
-        population: data
+        Population: data
       };
     } else {
       groups = {}
       data.forEach((datum) => {
         group = datum[grouping];
-        if (group in groups) groups[group].push(datum);
-        else groups[group] = [datum]
+        if (filterGroups.indexOf(group) === -1) {
+          if (group in groups) groups[group].push(datum);
+          else groups[group] = [datum]
+        }
       });
     }
 
     // Establish Axes Domains
     x.domain(_.pluck(data, "Education"));
-    y.domain([45, 90]);
+    y.domain([30, 90]);
 
     svg.append("g")
       .call(xAxis)
@@ -79,7 +84,16 @@ function lineChart(target, path, grouping=null) {
         y2: height,
       });
 
-    _.forEach(groups, (groupData, groupName, index) => {
+    let legend;
+    if (showLegend)
+      legend = svg.append("g")
+        .attr({
+          y: height
+        })
+        .attr("class", "legend");
+
+    let index = 0;
+    _.forEach(groups, (groupData, groupName) => {
       // Draw Circles
       svg.selectAll("." + groupName)
         .data(groupData, d => `circle: ${d["Education"]}, ${d["Age (Years)"]}`)
@@ -88,12 +102,33 @@ function lineChart(target, path, grouping=null) {
         .attr("class", "." + groupName)
         .attr("class", "circle")
         .attr("transform", d => `translate(${x(d["Education"])}, ${y(d["Age (Years)"])})`)
-        .attr("d", d3.svg.symbol())
+        .attr("d", symbol)
         .style("fill", colors(groupName));
+
+      if (legend) {
+        legend.append("rect")
+          .attr({
+            width: 12,
+            height: 12,
+            x: index * 160,
+            y: -margin.top,
+          })
+          .style("fill", colors(groupName));
+
+        legend.append("text")
+          .attr({
+            x: index * 160 + 16,
+            y: -margin.top+12,
+          })
+          .text(groupName);
+      }
+
+      index += 1;
     });
   });
 }
 
 // -- Running Script -- //
-lineChart("#viz1", "population.json")
+lineChart("#viz1", "population.json", null, [], false)
 lineChart("#viz3", "sex.json", "Sex")
+lineChart("#viz4", "maritalStatus.json", "Marital Status", ["Unknown"], true)
