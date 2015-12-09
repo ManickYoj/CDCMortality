@@ -54,7 +54,7 @@ function lineChart(target, path, grouping=null, filterGroups=[], showLegend=true
 
     // Establish Axes Domains
     x.domain(_.pluck(data, "Education"));
-    y.domain([30, 90]);
+    y.domain([30, 95]);
 
     svg.append("g")
       .call(xAxis)
@@ -110,15 +110,16 @@ function lineChart(target, path, grouping=null, filterGroups=[], showLegend=true
           .attr({
             width: 12,
             height: 12,
-            x: index * 160,
-            y: -margin.top,
+            x: width - index * 160 - margin.right - 15,
+            y: -margin.top ,
           })
           .style("fill", colors(groupName));
 
         legend.append("text")
           .attr({
-            x: index * 160 + 16,
-            y: -margin.top+12,
+            x: width - index * 160 - margin.right - 20,
+            y: -margin.top + 12,
+            "text-anchor": "end",
           })
           .text(groupName);
       }
@@ -131,4 +132,5 @@ function lineChart(target, path, grouping=null, filterGroups=[], showLegend=true
 // -- Running Script -- //
 lineChart("#viz1", "population.json", null, [], false)
 lineChart("#viz3", "sex.json", "Sex")
-lineChart("#viz4", "maritalStatus.json", "Marital Status", ["Unknown"], true)
+lineChart("#viz4", "race.json", "Race")
+lineChart("#viz5", "maritalStatus.json", "Marital Status", ["Unknown"], true)
